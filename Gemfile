@@ -44,6 +44,7 @@ group :development, :test do
   gem 'byebug'
   gem 'quiet_assets'
   gem 'dotenv-rails'
+  gem 'letter_opener_web'
 end
 
 group :development do
