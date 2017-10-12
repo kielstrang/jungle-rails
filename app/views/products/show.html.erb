@@ -26,6 +26,13 @@
       </div>
     </div>
 
+    <div class="row">
+      <div>Reviews</div>
+      <% @product.reviews.each do |review| %>
+        <div><%= "#{review.user.name}: rated #{review.rating}.  #{review.description}" %></div>
+      <% end %>
+    </div>
+
   </article>
 
 </section>
