@@ -5,6 +5,31 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>This is a Jungle order confirmation email!</p>>
+    <p>Thank you for ordering from Jungle, <%= @user.name %>!</p>
+    <table>
+      <tbody>
+        <% @order_total = 0 %>
+        <% @order.line_items.each do |item| %>
+          <% item_total = item.product.price * item.quantity %>
+          <% @order_total += item_total %>
+          <tr>
+            <td><%= item.product.name %></td>
+            <td>$<%= item.product.price %></td>
+            <td>x<%= item.quantity %>: </td>
+            <td>$<%= item_total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="3">
+            TOTAL:
+          </th>
+          <th>
+            <%= @order_total %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
   </body>
 </html>
