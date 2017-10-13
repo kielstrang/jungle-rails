@@ -2,6 +2,12 @@
 
   <header class="page-header">
     <h1><%= link_to @product.category.name, @product.category %> &raquo; <%= @product.name %></h1>
+    <script>
+      const ratingsField = document.querySelector('#ratings-hidden');
+      document.querySelector('.starrr').on('starrr:change', function(e, value){
+        ratingsField.val(value);
+      });
+    </script>
   </header>
 
   <article class="product-detail">
@@ -27,7 +33,7 @@
     </div>
 
     <% if current_user %>
-      <div class="row">
+      <!-- <div class="row">
         <%= form_for [@product, @review] do |form| %>
           <div class="field">
             <%= form.label :rating %>
@@ -43,13 +49,38 @@
             <%= form.submit %>
           </div>
         <% end %>
+      </div> -->
+
+      <div class="container">
+        <div class="row" style="margin-top:40px;">
+          <div class="col-md-6">
+            <div class="well well-sm">
+              <div class="row" id="post-review-box">
+                <div class="col-md-12">
+                  <%= form_for [@product, @review] do |form| %>
+                    <%= form.text_area :description, id: :review_description, class: 'form-control animated', placeholder: 'Enter your review here...', cols: 50, rows: 5 %>
+                    <div class="pull-left">
+                      <%= form.label :rating %>
+                      <%= form.number_field :rating, id: :review_rating, min: 1, max: 5 %>
+                    </div>
+                    <div class="pull-right">
+                      <div class="stars starrr" data-rating="0"></div>
+                      <%= form.submit 'Review', class: 'btn btn-success btn-lg' %>
+                    </div>
+                    <div class="clearfix"></div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
 
 
 
     <div class="row">
-      <div>Reviews</div>
+      <h3>Reviews</h3>
       <% @product.reviews.each do |review| %>
         <div><%= "#{review.user.name}: rated #{review.rating}.  #{review.description}" %></div>
         <% if current_user == review.user %>
