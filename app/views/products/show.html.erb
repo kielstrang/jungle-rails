@@ -82,11 +82,14 @@
     <div class="row">
       <h3>Reviews</h3>
       <% @product.reviews.each do |review| %>
-        <div><%= "#{review.user.name}: rated #{review.rating}.  #{review.description}" %></div>
-        <% if current_user == review.user %>
-          <%= link_to product_review_path(@product, review), data: {confirm: 'Delete this review?'}, class: 'btn btn-xs btn-danger', method: :delete do %>
-          -
-        <% end %>
+        <h4><%= "#{review.user.name}: rated #{review.rating}" %></h4>
+        <div>
+          <% if current_user == review.user %>
+            <%= link_to product_review_path(@product, review), data: {confirm: 'Delete this review?'}, class: 'btn btn-xs btn-danger', method: :delete do %>
+            -
+          <% end %>
+          <%= review.description %>
+        </div>
         <% end %>
       <% end %>
     </div>
