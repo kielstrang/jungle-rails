@@ -26,23 +26,25 @@
       </div>
     </div>
 
-    <div class="row">
-      <%= form_for [@product, @review] do |form| %>
-        <div class="field">
-          <%= form.label :rating %>
-          <%= form.number_field :rating, id: :review_rating %>
-        </div>
+    <% if current_user %>
+      <div class="row">
+        <%= form_for [@product, @review] do |form| %>
+          <div class="field">
+            <%= form.label :rating %>
+            <%= form.number_field :rating, id: :review_rating %>
+          </div>
 
-        <div class="field">
-          <%= form.label :description %>
-          <%= form.text_field :description, id: :review_description %>
-        </div>
+          <div class="field">
+            <%= form.label :description %>
+            <%= form.text_field :description, id: :review_description %>
+          </div>
 
-        <div class="actions">
-          <%= form.submit %>
-        </div>
-      <% end %>
-    </div>
+          <div class="actions">
+            <%= form.submit %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 
 
 
