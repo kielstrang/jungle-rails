@@ -45,6 +45,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'dotenv-rails'
   gem 'letter_opener_web'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
