@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
   describe 'Validations' do
-    @category = Category.new(name: 'category')
-    @category.save!
+    before do
+      @category = Category.new(name: 'category')
+      @category.save!
+    end
 
     it 'is valid if name, price, quantity, and category are specified' do
       @product = Product.new(name: 'product', price: 123, quantity: 123, category_id: 1)
