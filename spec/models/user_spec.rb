@@ -64,5 +64,17 @@ RSpec.describe User, type: :model do
       expect(@user).to be_instance_of User
       expect(@user.email).to eq 'user@user.com'
     end
+
+    it 'returns the User with extra spaces in the email' do
+      @user = User.authenticate_with_credentials('  user@user.com  ', 'password')
+      expect(@user).to be_instance_of User
+      expect(@user.email).to eq 'user@user.com'
+    end
+
+    it 'returns the User with case changes in the email' do
+      @user = User.authenticate_with_credentials('USER@user.com', 'password')
+      expect(@user).to be_instance_of User
+      expect(@user.email).to eq 'user@user.com'
+    end
   end
 end
