@@ -139,8 +139,8 @@ User.destroy_all
 u1 = User.create!({
   name: 'Bob',
   email: 'bob@bob.com',
-  password: 'iambob',
-  password_confirmation: 'iambob'
+  password: 'password',
+  password_confirmation: 'password'
 })
 
 

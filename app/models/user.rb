@@ -3,4 +3,9 @@ class User < ActiveRecord::Base
   validates :email, :name, :password, presence: true
   validates_length_of :password, minimum: 8
   has_secure_password
+
+  def User.authenticate_with_credentials(email, password)
+    user = User.find_by(email: email)
+    if user && user.authenticate(password) then user end
+  end
 end

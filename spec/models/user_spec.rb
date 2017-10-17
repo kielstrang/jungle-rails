@@ -45,4 +45,24 @@ RSpec.describe User, type: :model do
       expect(@user2.errors.full_messages).to include "Email has already been taken"
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    before do
+      User.new(email: 'user@user.com', name: 'User McUserface', password: 'password', password_confirmation: 'password').save!
+    end
+
+    it 'returns nil if email does not exist' do
+      expect(User.authenticate_with_credentials('wrong@email.com', 'wrongpassword')).to be(nil)
+    end
+
+    it 'returns nil if password is incorrect' do
+      expect(User.authenticate_with_credentials('user@user.com', 'wrongpassword')).to be(nil)
+    end
+
+    it 'returns the User object for that email if given valid credentials' do
+      @user = User.authenticate_with_credentials('user@user.com', 'password')
+      expect(@user).to be_instance_of User
+      expect(@user.email).to eq 'user@user.com'
+    end
+  end
 end
